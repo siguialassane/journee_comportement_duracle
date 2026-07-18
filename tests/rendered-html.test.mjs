@@ -53,7 +53,7 @@ test("conserve les ressources de marque et la configuration sécurisée", async 
   assert.match(emailService, /email:\s*payload\.email/);
   assert.match(emailService, /titre:\s*"Confirmation d’inscription/);
   assert.match(emailService, /reply_to:\s*"assistante_event@differencegroup\.info"/);
-  assert.match(emailService, /fiche:\s*reservationEmailHtml\(payload\)/);
+  assert.match(emailService, /message:\s*reservationEmailHtml\(payload\)/);
   assert.match(emailService, /accessToken:\s*emailJsConfig\.privateKey/);
 
   await Promise.all([

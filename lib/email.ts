@@ -73,7 +73,7 @@ async function requestEmail(payload: ConfirmationPayload) {
         titre: "Confirmation d’inscription — Journée du Comportement Durable",
         email: payload.email,
         reply_to: "assistante_event@differencegroup.info",
-        fiche: reservationEmailHtml(payload),
+        message: reservationEmailHtml(payload),
       },
     }),
   });
