@@ -37,10 +37,11 @@ test("rend la page publique et ses informations essentielles", async () => {
 });
 
 test("conserve les ressources de marque et la configuration sécurisée", async () => {
-  const [layout, route, config, envExample] = await Promise.all([
+  const [layout, route, config, emailService, envExample] = await Promise.all([
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/api/inscriptions/route.ts", import.meta.url), "utf8"),
     readFile(new URL("../lib/config.ts", import.meta.url), "utf8"),
+    readFile(new URL("../lib/email.ts", import.meta.url), "utf8"),
     readFile(new URL("../.env.example", import.meta.url), "utf8"),
   ]);
 
@@ -49,6 +50,11 @@ test("conserve les ressources de marque et la configuration sécurisée", async 
   assert.match(config, /SUPABASE_SECRET_KEY/);
   assert.match(route, /parsePhoneNumberFromString/);
   assert.match(envExample, /EMAILJS_PRIVATE_KEY=/);
+  assert.match(emailService, /email:\s*payload\.email/);
+  assert.match(emailService, /titre:\s*"Confirmation d’inscription/);
+  assert.match(emailService, /reply_to:\s*"assistante_event@differencegroup\.info"/);
+  assert.match(emailService, /fiche:\s*reservationEmailHtml\(payload\)/);
+  assert.match(emailService, /accessToken:\s*emailJsConfig\.privateKey/);
 
   await Promise.all([
     access(new URL("../public/og.png", import.meta.url)),
