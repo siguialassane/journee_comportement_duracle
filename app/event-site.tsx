@@ -318,11 +318,11 @@ export function EventSite() {
           </ScrollReveal>
           <ScrollReveal className="hero-visual" direction="right" delay={0.12} amount={0.08} ariaLabel="Le même quartier avant et après sa transformation">
             <figure className="hero-photo hero-photo-action">
-              <Image unoptimized={process.env.NODE_ENV === "development"} src="/images/hero/quartier-a-transformer.webp" alt="Rue résidentielle encombrée de déchets avant sa transformation" width={1280} height={853} sizes="(max-width: 1060px) 86vw, 44vw" priority />
+              <Image unoptimized={process.env.NODE_ENV === "development"} src="/images/hero/quartier-a-transformer.webp" alt="Rue résidentielle encombrée de déchets avant sa transformation" width={1534} height={1025} sizes="(max-width: 1060px) 86vw, 44vw" priority />
               <figcaption>Avant</figcaption>
             </figure>
             <figure className="hero-photo hero-photo-result">
-              <Image unoptimized={process.env.NODE_ENV === "development"} src="/images/hero/quartier-propre.webp" alt="Rue résidentielle propre et végétalisée" width={960} height={716} sizes="(max-width: 1060px) 78vw, 34vw" />
+              <Image unoptimized={process.env.NODE_ENV === "development"} src="/images/hero/quartier-propre.webp" alt="Rue résidentielle propre et végétalisée" width={1453} height={1082} sizes="(max-width: 1060px) 78vw, 34vw" />
               <figcaption>Après</figcaption>
             </figure>
           </ScrollReveal>
@@ -411,7 +411,7 @@ export function EventSite() {
           <a href="mailto:assistante_event@differencegroup.info"><Mail aria-hidden="true" />assistante_event@differencegroup.info</a>
           <a href="tel:+2252722308348"><Phone aria-hidden="true" />+225 27 22 30 83 48</a>
           <a href="tel:+2250502876705"><Phone aria-hidden="true" />+225 05 02 87 67 05</a>
-          <a href="https://wa.me/2250545173663"><MessageCircle aria-hidden="true" />+225 05 45 17 36 63</a>
+          <a href="https://wa.me/2250565173663"><MessageCircle aria-hidden="true" />+225 05 65 17 36 63</a>
           <a href="tel:+2250747516162"><Phone aria-hidden="true" />+225 07 47 51 61 62</a>
         </div>
         <div>
