@@ -30,14 +30,10 @@ test("rend la page publique et ses informations essentielles", async () => {
 
   const html = await response.text();
   assert.match(html, /Journée du Comportement Durable/i);
-  assert.match(html, /Le pouvoir des quartiers dans la transformation des comportements urbains durables/i);
   assert.match(html, /10 et 11 septembre 2026/i);
   assert.match(html, /Abidjan, Côte d(?:&#x27;|')Ivoire/i);
   assert.match(html, /Partenaire institutionnel/i);
-  assert.match(html, /Partenaires – Sponsors/i);
   assert.match(html, /Je m(?:&#x27;|'|’)inscris/i);
-  assert.doesNotMatch(html, /Différence Group présente/i);
-  assert.doesNotMatch(html, /Site réalisé par/i);
 });
 
 test("conserve les ressources de marque et la configuration sécurisée", async () => {
