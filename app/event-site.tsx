@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { FormEvent, useRef, useState } from "react";
 import Image from "next/image";
+import { ScrollArticle, ScrollItem, ScrollReveal, ScrollStagger } from "@/components/ui/scroll-reveal";
 
 type ProgramItem = { time: string; title: string; detail?: string };
 
@@ -260,7 +261,7 @@ export function EventSite() {
       <a className="skip-link" href="#contenu">Aller au contenu</a>
       <header className="site-header">
         <a className="brand-link" href="#accueil" aria-label="Accueil - Journée du Comportement Durable">
-          <Image unoptimized src="/images/brand/jcd-logo.png" alt="Journée du Comportement Durable" width={800} height={800} priority />
+          <Image unoptimized src="/images/brand/jcd-logo-header.png" alt="Journée du Comportement Durable" width={480} height={152} priority />
         </a>
         <nav className="desktop-nav" aria-label="Navigation principale">
           <a href="#objectif">Objectif</a>
@@ -284,10 +285,13 @@ export function EventSite() {
 
       <main id="contenu">
         <section className="hero" id="accueil">
-          <div className="hero-copy">
-            <div className="hero-edition"><span>2ᵉ édition</span> Différence Group présente</div>
-            <h1>Le pouvoir des quartiers transforme la ville.</h1>
-            <p className="hero-theme">Journée du Comportement Durable</p>
+          <ScrollReveal className="hero-copy" amount={0.08}>
+            <div className="hero-edition">2ᵉ édition</div>
+            <h1>Journée du Comportement Durable</h1>
+            <div className="hero-theme">
+              <span>Thème</span>
+              <p>Le pouvoir des quartiers dans la transformation des comportements urbains durables</p>
+            </div>
             <div className="hero-meta">
               <span><CalendarDays aria-hidden="true" />10 et 11 septembre 2026</span>
               <span><MapPin aria-hidden="true" />Abidjan, Côte d’Ivoire</span>
@@ -297,8 +301,8 @@ export function EventSite() {
               <a className="button button-accent" href="#inscription">Réserver ma place <ArrowRight aria-hidden="true" /></a>
               <a className="text-link" href="#programme">Voir le programme <ChevronRight aria-hidden="true" /></a>
             </div>
-          </div>
-          <div className="hero-visual" aria-label="Un quartier mobilisé puis transformé">
+          </ScrollReveal>
+          <ScrollReveal className="hero-visual" direction="right" delay={0.12} amount={0.08} ariaLabel="Un quartier mobilisé puis transformé">
             <figure className="hero-photo hero-photo-action">
               <Image unoptimized src="/images/hero/quartier-mobilise.webp" alt="Habitants mobilisés pour nettoyer un quartier" width={1024} height={1024} sizes="(max-width: 1060px) 86vw, 44vw" priority />
               <figcaption>Mobiliser</figcaption>
@@ -307,72 +311,70 @@ export function EventSite() {
               <Image unoptimized src="/images/hero/quartier-propre.webp" alt="Rue résidentielle propre et végétalisée" width={960} height={716} sizes="(max-width: 1060px) 78vw, 34vw" />
               <figcaption>Transformer</figcaption>
             </figure>
-          </div>
+          </ScrollReveal>
         </section>
 
         <section className="objective-section section" id="objectif">
-          <div className="section-heading">
+          <ScrollReveal className="section-heading">
             <p>Pourquoi cette journée ?</p>
             <h2>La transformation durable commence au plus près des citoyens.</h2>
-          </div>
-          <div className="objective-intro">
+          </ScrollReveal>
+          <ScrollReveal className="objective-intro" delay={0.08}>
             <p>La croissance rapide des villes augmente la pression sur la salubrité, les déchets et le cadre de vie. Pourtant, les quartiers possèdent une force décisive : leurs associations, leurs jeunes, leurs femmes, leurs entreprises et leurs leaders peuvent faire évoluer les pratiques au quotidien.</p>
             <p className="objective-callout">L’objectif principal est de créer un cadre de concertation multi-acteurs qui renforce le rôle des quartiers et améliore durablement la qualité de vie urbaine.</p>
-          </div>
-          <div className="axes-grid">
-            <article><span>01</span><Users aria-hidden="true" /><h3>Sensibiliser</h3><p>Faire connaître les comportements responsables qui protègent durablement le cadre de vie.</p></article>
-            <article><span>02</span><Building2 aria-hidden="true" /><h3>Mobiliser les quartiers</h3><p>Donner une place active aux communautés dans la gestion de leur environnement urbain.</p></article>
-            <article><span>03</span><Recycle aria-hidden="true" /><h3>Innover</h3><p>Identifier des solutions locales pour la collecte, le tri et la valorisation des déchets.</p></article>
-            <article><span>04</span><Handshake aria-hidden="true" /><h3>Coopérer</h3><p>Créer des passerelles entre collectivités, entreprises, associations et communautés.</p></article>
-          </div>
+          </ScrollReveal>
+          <ScrollStagger className="axes-grid">
+            <ScrollArticle><span>01</span><Users aria-hidden="true" /><h3>Sensibiliser</h3><p>Faire connaître les comportements responsables qui protègent durablement le cadre de vie.</p></ScrollArticle>
+            <ScrollArticle><span>02</span><Building2 aria-hidden="true" /><h3>Mobiliser les quartiers</h3><p>Donner une place active aux communautés dans la gestion de leur environnement urbain.</p></ScrollArticle>
+            <ScrollArticle><span>03</span><Recycle aria-hidden="true" /><h3>Innover</h3><p>Identifier des solutions locales pour la collecte, le tri et la valorisation des déchets.</p></ScrollArticle>
+            <ScrollArticle><span>04</span><Handshake aria-hidden="true" /><h3>Coopérer</h3><p>Créer des passerelles entre collectivités, entreprises, associations et communautés.</p></ScrollArticle>
+          </ScrollStagger>
         </section>
 
         <section className="audiences-band" aria-label="Publics concernés">
-          <div><Leaf aria-hidden="true" /><span>Institutions publiques</span></div>
-          <div><Leaf aria-hidden="true" /><span>Entreprises et startups</span></div>
-          <div><Leaf aria-hidden="true" /><span>Associations et communautés</span></div>
-          <div><Leaf aria-hidden="true" /><span>Citoyens engagés</span></div>
+          <ScrollStagger className="audiences-motion">
+            <ScrollItem><Leaf aria-hidden="true" /><span>Institutions publiques</span></ScrollItem>
+            <ScrollItem><Leaf aria-hidden="true" /><span>Entreprises et startups</span></ScrollItem>
+            <ScrollItem><Leaf aria-hidden="true" /><span>Associations et communautés</span></ScrollItem>
+            <ScrollItem><Leaf aria-hidden="true" /><span>Citoyens engagés</span></ScrollItem>
+          </ScrollStagger>
         </section>
 
         <section className="program-section section" id="programme">
-          <div className="section-heading section-heading-light">
+          <ScrollReveal className="section-heading section-heading-light">
             <p>Deux jours d’échanges</p>
             <h2>Comprendre ensemble. Construire des réponses. Passer à l’action.</h2>
-          </div>
-          <Program />
+          </ScrollReveal>
+          <ScrollReveal delay={0.1}><Program /></ScrollReveal>
         </section>
 
         <section className="gallery-section section" id="edition-passee">
-          <div className="gallery-heading">
+          <ScrollReveal className="gallery-heading">
             <div className="section-heading">
               <p>Une dynamique déjà engagée</p>
               <h2>La première édition en images</h2>
             </div>
             <p>Des décideurs, des associations, des entreprises et des citoyens réunis pour partager des expériences et faire émerger des solutions.</p>
-          </div>
-          <Gallery />
+          </ScrollReveal>
+          <ScrollReveal delay={0.08}><Gallery /></ScrollReveal>
         </section>
 
         <section className="partners-section section" id="partenaires">
-          <div className="section-heading centered-heading">
+          <ScrollReveal className="section-heading centered-heading">
             <p>Ils rendent cette rencontre possible</p>
-            <h2>Organisateur et partenaires</h2>
-          </div>
-          <div className="organizer-row">
-            <div className="organizer-copy"><span>Un événement conçu et organisé par</span><strong>Différence Group</strong></div>
-            <Image unoptimized src="/images/brand/difference-group.png" alt="Différence Group" width={776} height={296} />
-          </div>
-          <div className="institutional-partner">
+            <h2>Sponsors et Partenaires</h2>
+          </ScrollReveal>
+          <ScrollReveal className="institutional-partner" delay={0.08}>
             <span>Partenaire institutionnel</span>
             <Image unoptimized src="/images/partners/minhas.png" alt="Ministère de l'Hydraulique, de l'Assainissement et de la Salubrité" width={575} height={150} />
-          </div>
-          <div className="partner-wall" aria-label="Partenaires et sponsors">
-            {partners.map((partner) => <div key={partner.src}><Image unoptimized src={partner.src} alt={partner.alt} width={500} height={260} /></div>)}
-          </div>
+          </ScrollReveal>
+          <ScrollStagger className="partner-wall">
+            {partners.map((partner) => <ScrollItem key={partner.src}><Image unoptimized src={partner.src} alt={partner.alt} width={500} height={260} /></ScrollItem>)}
+          </ScrollStagger>
         </section>
 
         <section className="registration-section section" id="inscription">
-          <div className="registration-copy">
+          <ScrollReveal className="registration-copy" direction="left">
             <p>Inscription</p>
             <h2>Votre place au cœur du changement.</h2>
             <p>Rejoignez celles et ceux qui veulent faire des quartiers le premier moteur d’une ville plus propre, plus responsable et plus durable.</p>
@@ -380,8 +382,8 @@ export function EventSite() {
               <span><CalendarDays aria-hidden="true" />10 et 11 septembre 2026</span>
               <span><MapPin aria-hidden="true" />Abidjan, Côte d’Ivoire</span>
             </div>
-          </div>
-          <RegistrationForm />
+          </ScrollReveal>
+          <ScrollReveal direction="right" delay={0.1}><RegistrationForm /></ScrollReveal>
         </section>
       </main>
 
@@ -403,7 +405,6 @@ export function EventSite() {
         </div>
         <div className="footer-bottom">
           <span>© 2026 Différence Group</span>
-          <span className="site-credit">Site réalisé par <strong>by exias</strong></span>
           <a href="/admin/connexion">Administration</a>
         </div>
       </footer>
