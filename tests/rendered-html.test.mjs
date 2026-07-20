@@ -54,12 +54,16 @@ test("conserve les ressources de marque et la configuration sécurisée", async 
   assert.match(emailService, /titre:\s*"Confirmation d’inscription/);
   assert.match(emailService, /reply_to:\s*"assistante_event@differencegroup\.info"/);
   assert.match(emailService, /message:\s*reservationEmailHtml\(payload\)/);
+  assert.match(emailService, /Accéder à ma réservation et au PDF/);
+  assert.match(emailService, /payload\.reservationUrl/);
   assert.match(emailService, /accessToken:\s*emailJsConfig\.privateKey/);
 
   await Promise.all([
     access(new URL("../public/og.png", import.meta.url)),
     access(new URL("../public/images/brand/jcd-logo.png", import.meta.url)),
     access(new URL("../public/images/brand/difference-group.png", import.meta.url)),
+    access(new URL("../public/documents/journee-comportement-durable-2026.pdf", import.meta.url)),
+    access(new URL("../app/reservation/[id]/page.tsx", import.meta.url)),
     access(new URL("../supabase/migrations/202607180001_initial.sql", import.meta.url)),
   ]);
 });

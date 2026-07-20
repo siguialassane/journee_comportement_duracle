@@ -73,6 +73,17 @@ const gallery = [
   { src: "/images/gallery/06-salle.webp", alt: "Vue d'ensemble de la salle pendant une présentation" },
   { src: "/images/gallery/07-intervenant.webp", alt: "Intervenant au pupitre pendant la première édition" },
   { src: "/images/gallery/08-photo-officielle.webp", alt: "Photo officielle de représentants présents à l'événement" },
+  { src: "/images/gallery/09-delegation-officielle.webp", alt: "Arrivée d'une délégation dans la salle de l'événement" },
+  { src: "/images/gallery/10-accueil-inscription.webp", alt: "Participant remplissant sa fiche à l'accueil" },
+  { src: "/images/gallery/11-ouverture-officielle.webp", alt: "Participants debout pendant l'ouverture officielle" },
+  { src: "/images/gallery/12-intervenant-pupitre.webp", alt: "Intervenant s'exprimant au pupitre" },
+  { src: "/images/gallery/13-allocution-officielle.webp", alt: "Allocution d'un représentant pendant la cérémonie" },
+  { src: "/images/gallery/14-prise-parole-pupitre.webp", alt: "Prise de parole devant les participants" },
+  { src: "/images/gallery/15-echange-protocolaire.webp", alt: "Échange entre deux représentants pendant la rencontre" },
+  { src: "/images/gallery/16-photo-delegation.webp", alt: "Photo de délégation pendant l'événement" },
+  { src: "/images/gallery/17-participante-intervention.webp", alt: "Participante intervenant depuis la salle" },
+  { src: "/images/gallery/18-participant-intervention.webp", alt: "Participant partageant son point de vue au microphone" },
+  { src: "/images/gallery/19-photo-groupe.webp", alt: "Photo de groupe sur la scène de l'événement" },
 ];
 
 const partners = [
@@ -126,6 +137,8 @@ function Program() {
 function Gallery() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [selected, setSelected] = useState(gallery[0]);
+  const [showAll, setShowAll] = useState(false);
+  const visibleGallery = showAll ? gallery : gallery.slice(0, 8);
 
   function open(image: (typeof gallery)[number]) {
     setSelected(image);
@@ -135,25 +148,30 @@ function Gallery() {
   return (
     <>
       <div className="gallery-grid">
-        {gallery.map((image, index) => (
+        {visibleGallery.map((image, index) => (
           <button key={image.src} className={`gallery-item gallery-item-${index + 1}`} onClick={() => open(image)}>
-            <Image unoptimized src={image.src} alt={image.alt} fill sizes="(max-width: 760px) 100vw, (max-width: 1060px) 50vw, 25vw" />
+            <Image unoptimized={process.env.NODE_ENV === "development"} src={image.src} alt={image.alt} fill sizes="(max-width: 760px) 100vw, (max-width: 1060px) 50vw, 25vw" />
             <span>Voir l’image</span>
           </button>
         ))}
+      </div>
+      <div className="gallery-more">
+        <button className="button button-primary" type="button" aria-expanded={showAll} onClick={() => setShowAll((current) => !current)}>
+          {showAll ? "Réduire la galerie" : "Voir 11 photos supplémentaires"}
+        </button>
       </div>
       <dialog className="lightbox" ref={dialogRef} onClick={(event) => event.target === dialogRef.current && dialogRef.current?.close()}>
         <button className="lightbox-close" onClick={() => dialogRef.current?.close()} aria-label="Fermer l'image">
           <X aria-hidden="true" />
         </button>
-        <Image unoptimized src={selected.src} alt={selected.alt} width={1800} height={1200} sizes="100vw" />
+        <Image unoptimized={process.env.NODE_ENV === "development"} src={selected.src} alt={selected.alt} width={1800} height={1200} sizes="100vw" />
         <p>{selected.alt}</p>
       </dialog>
     </>
   );
 }
 
-type FormStatus = { type: "idle" | "loading" | "success" | "error"; message?: string; code?: string };
+type FormStatus = { type: "idle" | "loading" | "success" | "error"; message?: string };
 
 function RegistrationForm() {
   const [status, setStatus] = useState<FormStatus>({ type: "idle" });
@@ -188,7 +206,6 @@ function RegistrationForm() {
       form.reset();
       setStatus({
         type: "success",
-        code: data.reservationCode,
         message:
           data.emailStatus === "sent"
             ? "Votre inscription est confirmée. Un email vient de vous être envoyé."
@@ -242,10 +259,7 @@ function RegistrationForm() {
       <div className={`form-status ${status.type}`} aria-live="polite">
         {status.type === "success" && <Check aria-hidden="true" />}
         {status.message && (
-          <p>
-            {status.message}
-            {status.code && <strong> Référence : {status.code}</strong>}
-          </p>
+          <p>{status.message}</p>
         )}
       </div>
     </form>
@@ -261,7 +275,7 @@ export function EventSite() {
       <a className="skip-link" href="#contenu">Aller au contenu</a>
       <header className="site-header">
         <a className="brand-link" href="#accueil" aria-label="Accueil - Journée du Comportement Durable">
-          <Image unoptimized src="/images/brand/jcd-logo-header.png" alt="Journée du Comportement Durable" width={480} height={152} priority />
+          <Image unoptimized={process.env.NODE_ENV === "development"} src="/images/brand/jcd-logo-header.png" alt="Journée du Comportement Durable" width={480} height={152} priority />
         </a>
         <nav className="desktop-nav" aria-label="Navigation principale">
           <a href="#objectif">Objectif</a>
@@ -302,14 +316,14 @@ export function EventSite() {
               <a className="text-link" href="#programme">Voir le programme <ChevronRight aria-hidden="true" /></a>
             </div>
           </ScrollReveal>
-          <ScrollReveal className="hero-visual" direction="right" delay={0.12} amount={0.08} ariaLabel="Un quartier mobilisé puis transformé">
+          <ScrollReveal className="hero-visual" direction="right" delay={0.12} amount={0.08} ariaLabel="Le même quartier avant et après sa transformation">
             <figure className="hero-photo hero-photo-action">
-              <Image unoptimized src="/images/hero/quartier-mobilise.webp" alt="Habitants mobilisés pour nettoyer un quartier" width={1024} height={1024} sizes="(max-width: 1060px) 86vw, 44vw" priority />
-              <figcaption>Mobiliser</figcaption>
+              <Image unoptimized={process.env.NODE_ENV === "development"} src="/images/hero/quartier-a-transformer.webp" alt="Rue résidentielle encombrée de déchets avant sa transformation" width={1280} height={853} sizes="(max-width: 1060px) 86vw, 44vw" priority />
+              <figcaption>Avant</figcaption>
             </figure>
             <figure className="hero-photo hero-photo-result">
-              <Image unoptimized src="/images/hero/quartier-propre.webp" alt="Rue résidentielle propre et végétalisée" width={960} height={716} sizes="(max-width: 1060px) 78vw, 34vw" />
-              <figcaption>Transformer</figcaption>
+              <Image unoptimized={process.env.NODE_ENV === "development"} src="/images/hero/quartier-propre.webp" alt="Rue résidentielle propre et végétalisée" width={960} height={716} sizes="(max-width: 1060px) 78vw, 34vw" />
+              <figcaption>Après</figcaption>
             </figure>
           </ScrollReveal>
         </section>
@@ -366,10 +380,10 @@ export function EventSite() {
           </ScrollReveal>
           <ScrollReveal className="institutional-partner" delay={0.08}>
             <span>Partenaire institutionnel</span>
-            <Image unoptimized src="/images/partners/minhas.png" alt="Ministère de l'Hydraulique, de l'Assainissement et de la Salubrité" width={575} height={150} />
+            <Image unoptimized={process.env.NODE_ENV === "development"} src="/images/partners/minhas.png" alt="Ministère de l'Hydraulique, de l'Assainissement et de la Salubrité" width={575} height={150} />
           </ScrollReveal>
           <ScrollStagger className="partner-wall">
-            {partners.map((partner) => <ScrollItem key={partner.src}><Image unoptimized src={partner.src} alt={partner.alt} width={500} height={260} /></ScrollItem>)}
+            {partners.map((partner) => <ScrollItem key={partner.src}><Image unoptimized={process.env.NODE_ENV === "development"} src={partner.src} alt={partner.alt} width={500} height={260} /></ScrollItem>)}
           </ScrollStagger>
         </section>
 
@@ -377,7 +391,7 @@ export function EventSite() {
           <ScrollReveal className="registration-copy" direction="left">
             <p>Inscription</p>
             <h2>Votre place au cœur du changement.</h2>
-            <p>Rejoignez celles et ceux qui veulent faire des quartiers le premier moteur d’une ville plus propre, plus responsable et plus durable.</p>
+            <p>Rejoignez ceux et celles qui veulent faire des quartiers le premier moteur d’une ville plus propre, plus responsable et plus durable.</p>
             <div className="registration-reminder">
               <span><CalendarDays aria-hidden="true" />10 et 11 septembre 2026</span>
               <span><MapPin aria-hidden="true" />Abidjan, Côte d’Ivoire</span>
@@ -389,7 +403,7 @@ export function EventSite() {
 
       <footer className="site-footer" id="contact">
         <div className="footer-brand">
-          <Image unoptimized src="/images/brand/jcd-logo.png" alt="Journée du Comportement Durable" width={800} height={800} />
+          <Image unoptimized={process.env.NODE_ENV === "development"} src="/images/brand/jcd-logo.png" alt="Journée du Comportement Durable" width={800} height={800} />
           <p>La transformation durable de la ville commence dans chaque quartier.</p>
         </div>
         <div>

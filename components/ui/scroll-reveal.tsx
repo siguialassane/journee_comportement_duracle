@@ -32,7 +32,7 @@ function useScrollReveal(amount: number) {
         element.classList.add("is-visible");
         observer.unobserve(element);
       },
-      { threshold: amount, rootMargin: "0px 0px -6% 0px" },
+      { threshold: amount, rootMargin: "0px 0px -3% 0px" },
     );
 
     observer.observe(element);

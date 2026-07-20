@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   // Vinext sert les ressources publiques directement. Cela évite que le
   // chargeur Next/Image tente d'utiliser un binding d'assets inexistant.
   images: {
-    unoptimized: true,
+    unoptimized: process.env.NODE_ENV !== "production",
   },
 };
 

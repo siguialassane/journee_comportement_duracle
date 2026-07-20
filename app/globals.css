@@ -37,7 +37,7 @@ p { margin-block: 0; text-wrap: pretty; }
 .skip-link { position: fixed; z-index: 100; left: 18px; top: 12px; padding: 12px 16px; background: var(--accent); color: var(--white); border-radius: 8px; transform: translateY(-150%); transition: transform .2s var(--ease-out); }
 .skip-link:focus { transform: translateY(0); }
 
-.site-header { position: sticky; z-index: 30; top: 0; height: var(--header-height); display: flex; align-items: center; gap: 26px; padding-inline: max(20px, calc((100vw - 1240px) / 2)); background: color-mix(in oklch, var(--white) 94%, transparent); border-bottom: 1px solid var(--line); backdrop-filter: blur(12px); }
+.site-header { position: sticky; z-index: 30; top: 0; height: var(--header-height); display: flex; align-items: center; gap: 26px; padding-inline: max(20px, calc((100vw - 1240px) / 2)); background: var(--white); border-bottom: 1px solid var(--line); }
 .brand-link { display: flex; flex: 0 0 auto; align-items: center; }
 .brand-link img { width: 188px; height: 60px; object-fit: contain; }
 .desktop-nav { display: flex; align-items: center; justify-content: center; gap: clamp(16px, 2vw, 29px); margin-left: auto; }
@@ -126,6 +126,7 @@ p { margin-block: 0; text-wrap: pretty; }
 .gallery-item:hover img { transform: scale(1.035); filter: saturate(1.08); }
 .gallery-item > span { position: absolute; left: 12px; bottom: 12px; padding: 6px 10px; background: var(--white); color: var(--primary-strong); border-radius: 999px; font-size: 13px; font-weight: 750; opacity: 0; transform: translateY(7px); transition: .2s ease; }
 .gallery-item:hover > span, .gallery-item:focus-visible > span { opacity: 1; transform: translateY(0); }
+.gallery-more { display: flex; justify-content: center; margin-top: 32px; }
 .lightbox { width: min(1120px, calc(100vw - 40px)); max-height: calc(100vh - 40px); padding: 14px; background: var(--white); border: 0; border-radius: 14px; }
 .lightbox::backdrop { background: oklch(0.1 0.02 150 / .88); }
 .lightbox img { width: 100%; max-height: calc(100vh - 130px); object-fit: contain; }
@@ -174,22 +175,37 @@ p { margin-block: 0; text-wrap: pretty; }
 .footer-bottom { grid-column: 1 / -1; display: flex; justify-content: space-between; padding-top: 24px; border-top: 1px solid oklch(0.36 0.045 150); font-size: 14px; }
 .footer-bottom a { margin: 0; }
 
-/* Apparitions au scroll : visibles par défaut, activées progressivement en JavaScript. */
-.scroll-reveal, .scroll-stagger-item { transition: opacity .68s var(--ease-out), transform .68s var(--ease-out), filter .68s var(--ease-out); }
-.scroll-reveal.scroll-reveal-ready { opacity: .58; filter: blur(5px); transition-delay: var(--reveal-delay, 0s); }
-.scroll-reveal-ready.scroll-from-up { transform: translateY(34px); }
-.scroll-reveal-ready.scroll-from-left { transform: translateX(-42px); }
-.scroll-reveal-ready.scroll-from-right { transform: translateX(42px); }
-.scroll-reveal.is-visible { opacity: 1; transform: translate3d(0, 0, 0); filter: blur(0); }
-.scroll-stagger.scroll-reveal-ready > .scroll-stagger-item { opacity: .62; transform: translateY(24px); }
+/* Page personnelle accessible depuis l’email de confirmation. */
+.reservation-page { min-height: 100vh; display: grid; place-items: center; padding: clamp(24px, 6vw, 72px) 20px; background: var(--primary-strong); }
+.reservation-card { width: min(720px, 100%); padding: clamp(28px, 6vw, 58px); background: var(--white); color: var(--ink); border-radius: 16px; }
+.reservation-page-logo { display: inline-flex; margin-bottom: 38px; }
+.reservation-page-logo img { width: min(240px, 66vw); height: auto; }
+.reservation-kicker { color: var(--accent-dark); font-weight: 800; }
+.reservation-card h1 { max-width: 610px; margin-top: 10px; color: var(--primary-strong); font-size: clamp(2.5rem, 7vw, 4.4rem); }
+.reservation-welcome { max-width: 58ch; margin-top: 22px; color: var(--muted); font-size: 18px; }
+.reservation-event-details { display: flex; flex-wrap: wrap; gap: 14px 28px; margin-top: 26px; color: var(--primary-strong); font-weight: 700; }
+.reservation-event-details span { display: inline-flex; align-items: center; gap: 8px; }
+.reservation-event-details svg { width: 19px; color: var(--accent); }
+.reservation-download { width: 100%; margin-top: 30px; text-align: center; }
+.reservation-help { margin-top: 22px; color: var(--muted); font-size: 14px; text-align: center; }
+.reservation-help a { color: var(--primary); font-weight: 700; }
+
+/* Apparitions au scroll : uniquement opacité + transform pour rester fluides sur mobile. */
+.scroll-reveal, .scroll-stagger-item { transition: opacity .42s var(--ease-out), transform .42s var(--ease-out); }
+.scroll-reveal.scroll-reveal-ready { opacity: .82; transition-delay: var(--reveal-delay, 0s); }
+.scroll-reveal-ready.scroll-from-up { transform: translate3d(0, 18px, 0); }
+.scroll-reveal-ready.scroll-from-left { transform: translate3d(-22px, 0, 0); }
+.scroll-reveal-ready.scroll-from-right { transform: translate3d(22px, 0, 0); }
+.scroll-reveal.is-visible { opacity: 1; transform: translate3d(0, 0, 0); }
+.scroll-stagger.scroll-reveal-ready > .scroll-stagger-item { opacity: .82; transform: translate3d(0, 14px, 0); }
 .scroll-stagger.is-visible > .scroll-stagger-item { opacity: 1; transform: translateY(0); }
-.scroll-stagger.is-visible > .scroll-stagger-item:nth-child(2) { transition-delay: .07s; }
-.scroll-stagger.is-visible > .scroll-stagger-item:nth-child(3) { transition-delay: .14s; }
-.scroll-stagger.is-visible > .scroll-stagger-item:nth-child(4) { transition-delay: .21s; }
-.scroll-stagger.is-visible > .scroll-stagger-item:nth-child(5) { transition-delay: .28s; }
-.scroll-stagger.is-visible > .scroll-stagger-item:nth-child(6) { transition-delay: .35s; }
-.scroll-stagger.is-visible > .scroll-stagger-item:nth-child(7) { transition-delay: .42s; }
-.scroll-stagger.is-visible > .scroll-stagger-item:nth-child(8) { transition-delay: .49s; }
+.scroll-stagger.is-visible > .scroll-stagger-item:nth-child(2) { transition-delay: .045s; }
+.scroll-stagger.is-visible > .scroll-stagger-item:nth-child(3) { transition-delay: .09s; }
+.scroll-stagger.is-visible > .scroll-stagger-item:nth-child(4) { transition-delay: .135s; }
+.scroll-stagger.is-visible > .scroll-stagger-item:nth-child(5) { transition-delay: .18s; }
+.scroll-stagger.is-visible > .scroll-stagger-item:nth-child(6) { transition-delay: .225s; }
+.scroll-stagger.is-visible > .scroll-stagger-item:nth-child(7) { transition-delay: .27s; }
+.scroll-stagger.is-visible > .scroll-stagger-item:nth-child(8) { transition-delay: .315s; }
 
 /* Administration */
 .admin-login-page { min-height: 100vh; display: grid; place-items: center; padding: 70px 20px; background: var(--surface); }

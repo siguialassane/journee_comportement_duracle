@@ -45,7 +45,7 @@ export async function POST(request: Request) {
   }
 
   if (parsed.data.website) {
-    return NextResponse.json({ ok: true, reservationCode: reservationCode(), emailStatus: "sent" }, { status: 201 });
+    return NextResponse.json({ ok: true, emailStatus: "sent" }, { status: 201 });
   }
 
   const phone = parsePhoneNumberFromString(parsed.data.whatsapp, "CI");
@@ -106,7 +106,7 @@ export async function POST(request: Request) {
       email,
       firstName: parsed.data.prenom,
       lastName: parsed.data.nom,
-      reservationCode: code,
+      reservationUrl: new URL(`/reservation/${registration.id}`, request.url).toString(),
     });
     await client
       .from(REGISTRATIONS_TABLE)
@@ -120,5 +120,5 @@ export async function POST(request: Request) {
       .eq("id", registration.id);
   }
 
-  return NextResponse.json({ ok: true, reservationCode: code, emailStatus }, { status: 201 });
+  return NextResponse.json({ ok: true, emailStatus }, { status: 201 });
 }

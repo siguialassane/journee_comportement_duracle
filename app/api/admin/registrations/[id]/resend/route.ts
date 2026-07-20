@@ -4,7 +4,7 @@ import { sendConfirmationEmail } from "../../../../../../lib/email";
 import { getDataClient } from "../../../../../../lib/supabase";
 import { REGISTRATIONS_TABLE } from "../../../../../../lib/tables";
 
-export async function POST(_request: Request, context: { params: Promise<{ id: string }> }) {
+export async function POST(request: Request, context: { params: Promise<{ id: string }> }) {
   if (!(await getAdminUser())) return NextResponse.json({ ok: false }, { status: 401 });
   const { id } = await context.params;
   const client = getDataClient();
@@ -12,7 +12,7 @@ export async function POST(_request: Request, context: { params: Promise<{ id: s
 
   const { data, error } = await client
     .from(REGISTRATIONS_TABLE)
-    .select("id,email,first_name,last_name,reservation_code,email_status")
+    .select("id,email,first_name,last_name,email_status")
     .eq("id", id)
     .single();
   if (error || !data) return NextResponse.json({ ok: false }, { status: 404 });
@@ -25,7 +25,7 @@ export async function POST(_request: Request, context: { params: Promise<{ id: s
       email: data.email,
       firstName: data.first_name,
       lastName: data.last_name,
-      reservationCode: data.reservation_code,
+      reservationUrl: new URL(`/reservation/${data.id}`, request.url).toString(),
     });
     await client
       .from(REGISTRATIONS_TABLE)

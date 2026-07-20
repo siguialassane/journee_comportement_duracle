@@ -52,7 +52,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Search
   return (
     <main className="admin-page">
       <header className="admin-header">
-        <div><Image unoptimized src="/images/brand/jcd-logo.png" alt="" width={800} height={800} /><span>Administration</span></div>
+        <div><Image unoptimized={process.env.NODE_ENV === "development"} src="/images/brand/jcd-logo.png" alt="" width={800} height={800} /><span>Administration</span></div>
         <div><small>{user.email}</small><LogoutButton /></div>
       </header>
       <section className="admin-content">
@@ -74,13 +74,13 @@ export default async function AdminPage({ searchParams }: { searchParams: Search
         </form>
         <div className="admin-table-wrap">
           <table>
-            <thead><tr><th>Participant</th><th>Contact</th><th>Fonction</th><th>Entreprise</th><th>Réservation</th><th>Email</th><th>Inscrit le</th><th>Action</th></tr></thead>
+            <thead><tr><th>Participant</th><th>Contact</th><th>Fonction</th><th>Entreprise</th><th>Email</th><th>Inscrit le</th><th>Action</th></tr></thead>
             <tbody>
-              {registrations.length === 0 ? <tr><td colSpan={8} className="empty-row">Aucune inscription ne correspond à cette recherche.</td></tr> : registrations.map((row) => (
+              {registrations.length === 0 ? <tr><td colSpan={7} className="empty-row">Aucune inscription ne correspond à cette recherche.</td></tr> : registrations.map((row) => (
                 <tr key={row.id}>
                   <td><strong>{row.first_name} {row.last_name}</strong></td>
                   <td><a href={`mailto:${row.email}`}>{row.email}</a><small>{row.whatsapp}</small></td>
-                  <td>{row.job_title}</td><td>{row.company}</td><td><code>{row.reservation_code}</code></td>
+                  <td>{row.job_title}</td><td>{row.company}</td>
                   <td><span className={`email-badge ${row.email_status}`}>{row.email_status === "sent" ? "Envoyé" : row.email_status === "failed" ? "Échec" : "En attente"}</span></td>
                   <td>{formatDate(row.created_at)}</td>
                   <td><ResendButton id={row.id} disabled={row.email_status === "sent"} /></td>

@@ -4,7 +4,7 @@ export type ConfirmationPayload = {
   email: string;
   firstName: string;
   lastName: string;
-  reservationCode: string;
+  reservationUrl: string;
 };
 
 const delay = (milliseconds: number) =>
@@ -25,7 +25,7 @@ function escapeHtml(value: string) {
 
 function reservationEmailHtml(payload: ConfirmationPayload) {
   const fullName = escapeHtml(`${payload.firstName} ${payload.lastName}`);
-  const code = escapeHtml(payload.reservationCode);
+  const reservationUrl = escapeHtml(payload.reservationUrl);
 
   return `
     <div style="margin:0;padding:24px 12px;background:#f2f7f2;font-family:Arial,Helvetica,sans-serif;color:#173526;">
@@ -41,18 +41,20 @@ function reservationEmailHtml(payload: ConfirmationPayload) {
           <td style="padding:32px;">
             <p style="margin:0 0 18px;font-size:18px;line-height:1.55;">Bonjour <strong>${fullName}</strong>,</p>
             <p style="margin:0 0 24px;font-size:16px;line-height:1.65;color:#486052;">Votre inscription est confirmée. Nous serons heureux de vous accueillir à Abidjan pour deux journées d’échanges autour du pouvoir des quartiers dans la transformation des comportements urbains durables.</p>
-            <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;background:#f3f8f3;border-left:5px solid #ff7a00;border-radius:10px;">
-              <tr><td style="padding:22px 24px;">
-                <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#537060;">Code de réservation</div>
-                <div style="margin-top:7px;font-size:27px;font-weight:800;letter-spacing:.04em;color:#064b29;">${code}</div>
-              </td></tr>
-            </table>
-            <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;margin-top:26px;border-collapse:collapse;">
+            <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;">
               <tr><td style="padding:10px 0;border-bottom:1px solid #dce8de;font-weight:700;width:120px;">Dates</td><td style="padding:10px 0;border-bottom:1px solid #dce8de;">10 et 11 septembre 2026</td></tr>
               <tr><td style="padding:10px 0;border-bottom:1px solid #dce8de;font-weight:700;">Lieu</td><td style="padding:10px 0;border-bottom:1px solid #dce8de;">Abidjan, Côte d’Ivoire</td></tr>
               <tr><td style="padding:10px 0;font-weight:700;">Organisateur</td><td style="padding:10px 0;">Différence Group</td></tr>
             </table>
-            <p style="margin:28px 0 0;font-size:14px;line-height:1.6;color:#607466;">Conservez cet email et votre code de réservation. Pour toute question : <a href="mailto:assistante_event@differencegroup.info" style="color:#0a6338;font-weight:700;">assistante_event@differencegroup.info</a> · +225 27 22 30 83 48.</p>
+            <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;margin-top:28px;border-collapse:collapse;">
+              <tr>
+                <td style="text-align:center;">
+                  <a href="${reservationUrl}" style="display:inline-block;padding:15px 24px;background:#ff7200;color:#ffffff;font-size:16px;font-weight:700;line-height:1.2;text-decoration:none;border-radius:10px;">Accéder à ma réservation et au PDF</a>
+                </td>
+              </tr>
+            </table>
+            <p style="margin:14px 0 0;font-size:13px;line-height:1.55;text-align:center;color:#607466;">Ce lien personnel vous permet de consulter votre inscription et de télécharger le document officiel de l’événement.</p>
+            <p style="margin:28px 0 0;font-size:14px;line-height:1.6;color:#607466;">Conservez cet email. Pour toute question : <a href="mailto:assistante_event@differencegroup.info" style="color:#0a6338;font-weight:700;">assistante_event@differencegroup.info</a> · +225 27 22 30 83 48.</p>
           </td>
         </tr>
         <tr><td style="padding:20px 32px;background:#eef5ef;text-align:center;font-size:13px;color:#607466;">Un événement conçu et organisé par Différence Group.</td></tr>

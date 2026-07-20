@@ -35,7 +35,7 @@ export default function AdminLoginPage() {
     <main className="admin-login-page">
       <Link className="back-link" href="/"><ArrowLeft aria-hidden="true" />Retour au site</Link>
       <section className="login-panel">
-        <Image unoptimized src="/images/brand/jcd-logo.png" alt="Journée du Comportement Durable" width={800} height={800} priority />
+        <Image unoptimized={process.env.NODE_ENV === "development"} src="/images/brand/jcd-logo.png" alt="Journée du Comportement Durable" width={800} height={800} priority />
         <div className="login-icon"><LockKeyhole aria-hidden="true" /></div>
         <h1>Espace administrateur</h1>
         <p>Connectez-vous avec le compte autorisé dans Supabase.</p>
