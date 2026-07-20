@@ -285,9 +285,12 @@ export function EventSite() {
       <main id="contenu">
         <section className="hero" id="accueil">
           <div className="hero-copy">
-            <div className="hero-edition"><span>2ᵉ édition</span> Différence Group présente</div>
-            <h1>Le pouvoir des quartiers transforme la ville.</h1>
-            <p className="hero-theme">Journée du Comportement Durable</p>
+            <div className="hero-edition">2ᵉ édition</div>
+            <h1>Journée du Comportement Durable</h1>
+            <div className="hero-theme">
+              <span>Thème</span>
+              <p>Le pouvoir des quartiers dans la transformation des comportements urbains durables</p>
+            </div>
             <div className="hero-meta">
               <span><CalendarDays aria-hidden="true" />10 et 11 septembre 2026</span>
               <span><MapPin aria-hidden="true" />Abidjan, Côte d’Ivoire</span>
@@ -355,19 +358,22 @@ export function EventSite() {
 
         <section className="partners-section section" id="partenaires">
           <div className="section-heading centered-heading">
-            <p>Ils rendent cette rencontre possible</p>
-            <h2>Organisateur et partenaires</h2>
+            <p>Une mobilisation partagée</p>
+            <h2>Partenaires et sponsors</h2>
           </div>
-          <div className="organizer-row">
-            <div className="organizer-copy"><span>Un événement conçu et organisé par</span><strong>Différence Group</strong></div>
-            <Image unoptimized src="/images/brand/difference-group.png" alt="Différence Group" width={776} height={296} />
-          </div>
-          <div className="institutional-partner">
-            <span>Partenaire institutionnel</span>
-            <Image unoptimized src="/images/partners/minhas.png" alt="Ministère de l'Hydraulique, de l'Assainissement et de la Salubrité" width={575} height={150} />
-          </div>
-          <div className="partner-wall" aria-label="Partenaires et sponsors">
-            {partners.map((partner) => <div key={partner.src}><Image unoptimized src={partner.src} alt={partner.alt} width={500} height={260} /></div>)}
+          <div className="partner-showcase">
+            <div className="institutional-partner">
+              <span>Partenaire institutionnel</span>
+              <div className="institutional-logo">
+                <Image unoptimized src="/images/partners/minhas.png" alt="Ministère de l'Hydraulique, de l'Assainissement et de la Salubrité" width={575} height={150} />
+              </div>
+            </div>
+            <div className="sponsor-group">
+              <h3>Partenaires – Sponsors</h3>
+              <div className="partner-wall" aria-label="Partenaires et sponsors">
+                {partners.map((partner) => <div key={partner.src}><Image unoptimized src={partner.src} alt={partner.alt} width={500} height={260} /></div>)}
+              </div>
+            </div>
           </div>
         </section>
 
@@ -403,7 +409,6 @@ export function EventSite() {
         </div>
         <div className="footer-bottom">
           <span>© 2026 Différence Group</span>
-          <span className="site-credit">Site réalisé par <strong>by exias</strong></span>
           <a href="/admin/connexion">Administration</a>
         </div>
       </footer>
