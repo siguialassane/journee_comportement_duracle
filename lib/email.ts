@@ -54,7 +54,7 @@ function reservationEmailHtml(payload: ConfirmationPayload) {
               </tr>
             </table>
             <p style="margin:14px 0 0;font-size:13px;line-height:1.55;text-align:center;color:#607466;">Ce lien personnel vous permet de consulter votre inscription et de télécharger le document officiel de l’événement.</p>
-            <p style="margin:28px 0 0;font-size:14px;line-height:1.6;color:#607466;">Conservez cet email. Pour toute question : <a href="mailto:assistante_event@differencegroup.info" style="color:#0a6338;font-weight:700;">assistante_event@differencegroup.info</a> · +225 27 22 30 83 48.</p>
+            <p style="margin:28px 0 0;font-size:14px;line-height:1.7;color:#607466;">Conservez cet email. Pour toute question : <a href="mailto:assistante_event@differencegroup.info" style="color:#0a6338;font-weight:700;">assistante_event@differencegroup.info</a><br />+225 27 22 30 83 48<br />+225 05 02 87 67 05<br />+225 05 45 17 36 63<br />+225 07 47 51 61 62</p>
           </td>
         </tr>
         <tr><td style="padding:20px 32px;background:#eef5ef;text-align:center;font-size:13px;color:#607466;">Un événement conçu et organisé par Différence Group.</td></tr>

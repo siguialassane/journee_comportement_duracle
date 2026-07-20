@@ -410,8 +410,9 @@ export function EventSite() {
           <h2>Contact</h2>
           <a href="mailto:assistante_event@differencegroup.info"><Mail aria-hidden="true" />assistante_event@differencegroup.info</a>
           <a href="tel:+2252722308348"><Phone aria-hidden="true" />+225 27 22 30 83 48</a>
-          <a href="https://wa.me/2250565173663"><MessageCircle aria-hidden="true" />+225 05 65 17 36 63</a>
-          <a href="tel:+2250747515162"><Phone aria-hidden="true" />+225 07 47 51 51 62</a>
+          <a href="tel:+2250502876705"><Phone aria-hidden="true" />+225 05 02 87 67 05</a>
+          <a href="https://wa.me/2250545173663"><MessageCircle aria-hidden="true" />+225 05 45 17 36 63</a>
+          <a href="tel:+2250747516162"><Phone aria-hidden="true" />+225 07 47 51 61 62</a>
         </div>
         <div>
           <h2>Adresse de contact</h2>
